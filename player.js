@@ -12,7 +12,6 @@ let currentSong = null;
 let progressTimer = null;
 
 
-
 // Show the song list
 function showSongs() {
   console.clear();
@@ -37,4 +36,38 @@ function showSongs() {
   console.log("Q Press Q to quit");
 }
 
+
+// Display menu
 showSongs();
+
+process.stdin.setEncoding("utf-8");
+process.stdin.setRawMode(true);
+process.stdin.resume();
+
+
+// Keyboard input
+process.stdin.on("data", async (input) => {
+
+  // Up arrow
+  if (input === "\x1b[A") {
+
+    if (selected > 0) {
+      selected--;
+      showSongs();
+    }
+
+    return;
+  }
+
+
+  // Down arrow
+  if (input === "\x1b[B") {
+
+    if (selected < songs.length - 1) {
+      selected++;
+      showSongs();
+    }
+
+    return;
+  }
+});
