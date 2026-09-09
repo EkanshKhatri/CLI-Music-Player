@@ -12,6 +12,7 @@ let currentSong = null;
 let progressTimer = null;
 
 
+
 // Show the song list
 function showSongs() {
   console.clear();
