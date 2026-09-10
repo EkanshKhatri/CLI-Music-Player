@@ -37,6 +37,23 @@ function showSongs() {
 }
 
 
+// Play selected song
+async function playSong(index) {
+
+  const file = `./songs/${songs[index]}`;
+
+  console.log(`\n🎵 Loading: ${songs[index]}`);
+
+  currentSong = audio(file);
+
+  await currentSong.ready;
+
+  console.log(`🎵 Playing: ${songs[index]}`);
+
+  currentSong.play();
+}
+
+
 // Display menu
 showSongs();
 
@@ -67,6 +84,15 @@ process.stdin.on("data", async (input) => {
       selected++;
       showSongs();
     }
+
+    return;
+  }
+
+
+  // Enter
+  if (input === "\r") {
+
+    await playSong(selected);
 
     return;
   }
