@@ -69,6 +69,32 @@ async function playSong(index) {
 }
 
 
+// Pause
+function pauseSong() {
+
+  if (!currentSong) {
+    return;
+  }
+
+  currentSong.pause();
+
+  console.log("\n⏸️ Song paused.");
+}
+
+
+// Resume
+function resumeSong() {
+
+  if (!currentSong) {
+    return;
+  }
+
+  currentSong.resume();
+
+  console.log("\n▶️ Song resumed.");
+}
+
+
 // Display menu
 showSongs();
 
@@ -108,6 +134,24 @@ process.stdin.on("data", async (input) => {
   if (input === "\r") {
 
     await playSong(selected);
+
+    return;
+  }
+
+
+  // Pause
+  if (input === "p" || input === "P") {
+
+    pauseSong();
+
+    return;
+  }
+
+
+  // Resume
+  if (input === "r" || input === "R") {
+
+    resumeSong();
 
     return;
   }
