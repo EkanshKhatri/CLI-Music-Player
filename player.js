@@ -37,8 +37,23 @@ function showSongs() {
 }
 
 
+// Stop current song
+function stopCurrentSong() {
+
+  if (currentSong) {
+    currentSong.stop();
+    currentSong.dispose();
+
+    currentSong = null;
+  }
+}
+
+
 // Play selected song
 async function playSong(index) {
+
+  // Stop previous song
+  stopCurrentSong();
 
   const file = `./songs/${songs[index]}`;
 
