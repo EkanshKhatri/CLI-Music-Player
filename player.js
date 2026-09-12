@@ -50,6 +50,41 @@ function showSongs() {
 }
 
 
+// Show progress bar
+function showProgress() {
+
+  if (!currentSong) {
+    return;
+  }
+
+  const currentTime = currentSong.currentTime;
+  const duration = currentSong.duration;
+
+  if (!duration) {
+    return;
+  }
+
+  const percentage = (currentTime / duration) * 100;
+
+  const barLength = 30;
+
+  const filledLength = Math.floor(
+    (percentage / 100) * barLength
+  );
+
+  const emptyLength = barLength - filledLength;
+
+  const bar =
+    "█".repeat(filledLength) +
+    "░".repeat(emptyLength);
+
+  process.stdout.write(
+    `\r🎵 ${bar} ${percentage.toFixed(0)}% ` +
+    `${formatTime(currentTime)} / ${formatTime(duration)}`
+  );
+}
+
+
 // Stop current song
 function stopCurrentSong() {
 
