@@ -85,8 +85,31 @@ function showProgress() {
 }
 
 
+// Start progress timer
+function startProgress() {
+
+  stopProgress();
+
+  progressTimer = setInterval(() => {
+    showProgress();
+  }, 250);
+}
+
+
+// Stop progress timer
+function stopProgress() {
+
+  if (progressTimer) {
+    clearInterval(progressTimer);
+    progressTimer = null;
+  }
+}
+
+
 // Stop current song
 function stopCurrentSong() {
+
+  stopProgress();
 
   if (currentSong) {
     currentSong.stop();
@@ -114,6 +137,8 @@ async function playSong(index) {
   console.log(`🎵 Playing: ${songs[index]}`);
 
   currentSong.play();
+
+  startProgress();
 }
 
 
