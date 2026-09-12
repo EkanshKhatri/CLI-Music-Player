@@ -12,6 +12,19 @@ let currentSong = null;
 let progressTimer = null;
 
 
+// Format seconds into 0:00
+function formatTime(seconds) {
+  seconds = Math.floor(seconds);
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
+  return `${minutes}:${remainingSeconds
+    .toString()
+    .padStart(2, "0")}`;
+}
+
+
 // Show the song list
 function showSongs() {
   console.clear();
