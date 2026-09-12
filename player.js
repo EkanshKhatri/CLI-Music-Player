@@ -139,6 +139,19 @@ async function playSong(index) {
   currentSong.play();
 
   startProgress();
+
+  currentSong.on("ended", () => {
+
+    stopProgress();
+
+    process.stdout.write("\n");
+
+    console.log("Song finished...");
+
+    currentSong.dispose();
+
+    currentSong = null;
+  });
 }
 
 
@@ -178,6 +191,22 @@ process.stdin.resume();
 
 // Keyboard input
 process.stdin.on("data", async (input) => {
+
+  // Quit
+  if (input === "q" || input === "Q") {
+
+    stopCurrentSong();
+
+    process.stdin.setRawMode(false);
+    process.stdin.pause();
+
+    console.clear();
+
+    console.log("👋 Goodbye!");
+
+    process.exit(0);
+  }
+
 
   // Up arrow
   if (input === "\x1b[A") {
